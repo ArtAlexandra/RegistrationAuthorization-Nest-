@@ -10,4 +10,6 @@ export class CreateUserDto{
 
     readonly phone:string;
 
+    readonly admin:boolean;
+
 }

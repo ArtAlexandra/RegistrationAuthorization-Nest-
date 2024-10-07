@@ -17,4 +17,8 @@ export class User extends Model{
     @Column({type: DataType.STRING, unique: true, allowNull: false})
     email:string;
 
+    @Column({type: DataType.BOOLEAN, allowNull:false})
+    admin:boolean;
+
+
 }

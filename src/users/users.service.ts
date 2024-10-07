@@ -62,6 +62,7 @@ export class UsersService {
         user.email = createUserDto.email;
         user.password = hashedPassword;
         user.phone = createUserDto.phone;
+        user.admin = createUserDto.admin;
 
         return user.save();
         
