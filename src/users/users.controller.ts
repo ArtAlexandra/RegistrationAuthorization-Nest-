@@ -3,13 +3,16 @@ import { Body, Controller, Get, Post, UseGuards, Param, Patch, HttpException, Ht
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { User } from './users.model';
 
-
+@ApiTags("Пользователь")
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService){}
 
-   
+    @ApiOperation({summary: "Регистрация пользователя"})
+    @ApiResponse({status:200, type: User})
     @Post('/registration')
     async create(@Body() userDto: CreateUserDto){
         try{
@@ -29,11 +32,15 @@ export class UsersController {
     }
 
    
+    @ApiOperation({summary: "Получить всех пользователей"})
+    @ApiResponse({status:200, type: [User]})
     @Get('/get-all')
     getAll(){
         return this.usersService.findAll();
     }
 
+    @ApiOperation({summary: "Получить конкретного пользователя"})
+    @ApiResponse({status:200, type: User})
     @Get('/get-user/:id')
     async getUser(@Param('id') id:number){
         try{
@@ -51,6 +58,8 @@ export class UsersController {
         
     }
 
+    @ApiOperation({summary: "Вход для пользователя, авторизация"})
+    @ApiResponse({status:200, type: User})
     @Post('/login')
     async Login(@Body() userDto: UserDto){
     
